@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @pass.name %>
+</p>
+
+<p>
+  <b>Locality:</b>
+  <%= @pass.locality %>
+</p>
+
+<p>
+  <b>Altitude:</b>
+  <%= @pass.altitude %>
+</p>
+
+<p>
+  <b>Latitude:</b>
+  <%= @pass.latitude %>
+</p>
+
+<p>
+  <b>Longitude:</b>
+  <%= @pass.longitude %>
+</p>
+
+
+<%= link_to 'Edit', edit_pass_path(@pass) %> |
+<%= link_to 'Back', passes_path %>
