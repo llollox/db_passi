@@ -1,6 +1,19 @@
 DbPassi::Application.routes.draw do
-  resources :passes
+  resources :users
 
+  resources :user_sessions
+  
+  match 'login' => 'user_sessions#new', :as => :login
+  match 'logout' => 'user_sessions#destroy', :as => :logout
+
+  resources :passes do 
+    resources :localities, shallow: true
+  end
+
+
+  match 'map' => 'passes#map', :as => :map
+
+  post 'passes/search' => 'passes#search', :as => :passes_search
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -51,7 +64,7 @@ DbPassi::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'passes#index'
 
   # See how all your routes lay out with "rake routes"
 

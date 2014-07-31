@@ -1,18 +1,11 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @pass.name %>
-</p>
-
-<p>
-  <b>Locality:</b>
-  <%= @pass.locality %>
-</p>
+<br/>
+<center><h2><%= @pass.name %></h2></center>
+<hr/>
 
 <p>
   <b>Altitude:</b>
-  <%= @pass.altitude %>
+  <%= @pass.altitude %> metri
 </p>
 
 <p>
@@ -25,6 +18,16 @@
   <%= @pass.longitude %>
 </p>
 
+<% if current_user %>
 
-<%= link_to 'Edit', edit_pass_path(@pass) %> |
-<%= link_to 'Back', passes_path %>
+  <br/>
+
+  <%= link_to command_label('fa fa-edit', "Edit"), 
+      edit_pass_path(@pass), :class=> "btn btn-primary" %>
+
+  <%= link_to command_label('fa fa-trash-o', "Destroy"), 
+      @pass, method: :delete, data: { confirm: 'Are you sure?' }, 
+      :class => "btn btn-danger" %>
+<% end %>
+<br/><br/>
+<%= render "localities/index" %>

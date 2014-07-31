@@ -1,0 +1,13 @@
+<div class="form-actions">
+  
+  <% if action_name == "edit" %>
+    <%= f.button :submit, 
+    		"Edit " + f.object.class.name.capitalize, 
+      	:class=> "btn btn-primary btn-large" %>
+  <% else %>
+    <%= f.button :submit, 
+    		"Create " + f.object.class.name.capitalize, 
+      	:class=> "btn btn-success btn-large" %>
+  <% end %>
+
+</div>

@@ -3,12 +3,25 @@
 <head>
   <title>DbPassi</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+
+  <%= javascript_include_tag "http://maps.google.com/maps/api/js?key=AIzaSyB9XMLYNp-bKeDbBeHrVsrypkzWcqXi7NA&libraries=geometry&sensor=true&language=it" %>
+  <%= javascript_include_tag "http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js" %>
+  <%= javascript_include_tag "http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js" %>
+  
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<%= render "layouts/navbar" %>
+
+<div class="container-fluid">
+	<% flash.each do |key, msg| %>
+	  <%= content_tag(:div, msg, class: "flash alert alert-#{key}", style: "margin-top:20px;") %>
+	<% end %>
+
+	<%= yield %>
+</div>
 
 </body>
 </html>

@@ -1,0 +1,101 @@
+
+<div id="map"></div>
+
+<script type="text/javascript">
+
+handler = Gmaps.build('Google', { 
+	builders: { Marker: InfoBoxBuilder},
+	markers:
+    {clusterer: {
+      gridSize: 40,
+      maxZoom: 10,
+      styles: [
+      	{
+				height: 53,
+				width: 53,
+				url: "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m1.png"
+				},
+				{
+				height: 56,
+				width: 56,
+				url: "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m2.png"
+				},
+				{
+				height: 66,
+				width: 66,
+				url: "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m3.png"
+				},
+				{
+				height: 78,
+				width: 78,
+				url: "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m4.png"
+				},
+				{
+				height: 90,
+				width: 90,
+				url: "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m5.png"
+				}
+			]
+  	}
+  }
+});
+
+handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(<%=raw @markers.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+
+   //  for (var i=0;i < markers.length; i++){
+	  //   var marker = markers[i];
+	  //   google.maps.event.addListener(
+	  //   	markers[i].getServiceObject(), 
+	  //   	"click", 
+	  //   	function(event) {
+	  //   		$.get("/municipalities/" + this.title + "/infobox", function( data ) {
+			// 		  $("div.infobox1").html( data );
+			// 		});
+	  //   	}
+	  //   );
+	  // }
+
+});
+
+</script>
+
+<style>
+
+  #map {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    min-height: 100%;
+  }
+
+  #map img { 
+  	max-width: none;
+	}
+
+	#map label { 
+	  width: auto; display:inline; 
+	} 
+
+	.infobox1 {
+      border:1px solid #d5d5d5;
+      margin-top: 8px;
+      background:#fefefe;
+      font-family:Arial, Helvetica, sans-serif;
+      font-size:12px;
+      padding: 1em;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      -webkit-box-shadow: 0 0  5px #acacac;
+      box-shadow: 0 0 5px #acacac;
+  }
+
+  .infoBox img{
+  	margin-top: 10px !important; 
+		margin-right: 2px !important;
+  }
+</style>

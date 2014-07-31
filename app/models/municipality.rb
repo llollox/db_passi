@@ -88,7 +88,9 @@ class Municipality < ActiveResource::Base
   end
 
   def province
-    Province.find(self.province_id).first
+    result = Province.find(self.province_id)
+    result = result.first if result.class.name.to_s == "Array"
+    return result
   end
 
   def region
@@ -104,16 +106,12 @@ class Municipality < ActiveResource::Base
     return symbol.first if !symbol.nil?
   end
 
-  def self.test name 
-    # begin
-    #    data = Net::HTTP.get_response("http://0.0.0.0:3000/search?model=Municipality&name=" + name)
-    # rescue
-    #    print "Connection error."
-    # end
+  def caps
+    Cap.find(:all, params: { municipality_id: self.id})
+  end
 
-    hash = JSON.parse(Municipality.post(:search, headers = {:name => name, :model => "Municipality"}).body)
-    municipality = Municipality.new(hash)
-    # Municipality.find(:all, :from => "/search", params: {model: "Municipality", name: name})
+  def fractions
+    Fraction.find(:all, params: { municipality_id: self.id})
   end
 
 end

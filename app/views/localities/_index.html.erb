@@ -1,0 +1,40 @@
+<legend>Localities (<%= @localities.size.to_s %>)</legend>
+<%#= link_to 'New Locality', new_pass_locality_path(@pass), 
+  :class => "btn btn-success" if current_user %>
+<br/><br/>
+<% if !@localities.empty? %>
+
+  <%#= alphabetical_paginate @alphaParams %>
+  <!-- <div id="pagination_table"> -->
+  <table class="table table-hover table-striped">
+    <tr>
+      <th>#</th>
+      <th>Municipality</th>
+      <th>Fraction</th>
+      <% if current_user %>
+        <!-- <th></th> -->
+        <th></th>
+      <% end %>
+    </tr>
+
+    <% @localities.each_with_index do |locality,index| %>
+    <tr>
+      <td><%= index + 1 %></td>
+      <td><%= locality.municipality.name if !locality.municipality.nil? %></td>
+      <td><%= locality.fraction.name if !locality.fraction.nil? %></td>
+      <% if current_user %>
+        <!-- <td><%#= link_to 'Edit', edit_locality_path(locality), 
+          :class => "btn btn-primary" %></td> -->
+        <td><%= link_to 'Destroy', locality, method: :delete, 
+          data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
+  <!-- </div> -->
+
+<% else %>
+<p class="muted">
+  <i>No localities for this pass!</i>
+</p>
+<% end %>

@@ -1,31 +1,33 @@
-<h1>Listing passes</h1>
-
-<table>
+<br/>
+<center><h2>List of Passes</h2></center>
+<hr/>
+<%= link_to 'New Pass', new_pass_path, :class => "btn btn-success" if current_user %>
+<%= alphabetical_paginate @alphaParams %>
+<div id="pagination_table">
+<table class="table table-hover table-striped">
   <tr>
+    <th>#</th>
     <th>Name</th>
-    <th>Locality</th>
     <th>Altitude</th>
-    <th>Latitude</th>
-    <th>Longitude</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <% if current_user %>
+        <th></th>
+        <th></th>
+    <% end %>
   </tr>
 
-<% @passes.each do |pass| %>
+<% @passes.each_with_index do |pass,index| %>
   <tr>
-    <td><%= pass.name %></td>
-    <td><%= pass.locality %></td>
+    <td><%= index + 1 %></td>
+    <td><%= link_to pass.name, pass %></td>
     <td><%= pass.altitude %></td>
-    <td><%= pass.latitude %></td>
-    <td><%= pass.longitude %></td>
-    <td><%= link_to 'Show', pass %></td>
-    <td><%= link_to 'Edit', edit_pass_path(pass) %></td>
-    <td><%= link_to 'Destroy', pass, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% if current_user %>
+        <td><%= link_to 'Edit', edit_pass_path(pass), 
+            :class => "btn btn-primary" %></td>
+        <td><%= link_to 'Destroy', pass, method: :delete, 
+            data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
-
+</div>
 <br />
-
-<%= link_to 'New Pass', new_pass_path %>

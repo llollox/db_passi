@@ -1,8 +1,22 @@
 class PassesController < ApplicationController
+  require "#{Rails.root}/lib/tasks/task_utilities"
+  include TaskUtilities
+
+  def search
+    name = encode(params[:name]) if params[:name]
+    @passes = findItemByName("Pass", name)
+
+    respond_to do |format|
+      format.json { render json: @passes }
+    end
+
+  end
+
   # GET /passes
   # GET /passes.json
   def index
-    @passes = Pass.all
+    @passes, @alphaParams = 
+       Pass.all.alpha_paginate(params[:letter], {:js => true}){|pass| pass.name}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,10 +24,26 @@ class PassesController < ApplicationController
     end
   end
 
+  def map
+    @passes = Pass.where("latitude IS NOT NULL")
+
+    @markers = Gmaps4rails.build_markers(@passes) do |pass, marker|
+      marker.lat pass.latitude
+      marker.lng pass.longitude
+      marker.title pass.id.to_s
+      marker.infowindow pass.name
+    end
+
+    respond_to do |format|
+      format.html # index.html.erb
+    end
+  end
+
   # GET /passes/1
   # GET /passes/1.json
   def show
     @pass = Pass.find(params[:id])
+    @localities = @pass.localities
 
     respond_to do |format|
       format.html # show.html.erb

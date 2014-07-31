@@ -1,0 +1,35 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="#">Comuni</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li id="list-item"><%= link_to "List", passes_path %></li>
+          <li id="map-item"><%= link_to "Map", map_path %></li>          
+        </ul>
+        <ul class="nav pull-right">
+          <% if current_user %>
+            <li id="logout-item"><%= link_to "Logout", :logout%></li>  
+          <% else %>
+            <li id="login-item"><%= link_to "Login", :login %></li>
+          <% end %>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  <% if action_name == "map" %>
+    $("#map-item").addClass("active");
+  <% else %>
+    $("#list-item").addClass("active");
+  <% end %>
+});
+</script>

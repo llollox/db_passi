@@ -105,6 +105,9 @@ module TaskUtilities
   end
 
   def encode name
+    name = name.split("/").first if name.match(/\//)
+    name = name.split("\\").first if name.match(/\\/)
+    name = name.split(" - ").first if name.match(/ - /)
     return name.gsub(/[^0-9A-Za-z]/, '').downcase
   end
 
