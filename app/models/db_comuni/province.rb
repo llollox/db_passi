@@ -3,7 +3,7 @@ class Province < ActiveResource::Base
   include ShallowNestedRoutes
   set_shallow_nested_route_parent :region
 
-  self.site = "http://0.0.0.0:3001"
+  self.site = "http://www2.westroadbike.it:3001/"
 
   def self.all
     provinces = []

@@ -1,6 +1,6 @@
 class Region < ActiveResource::Base
 
-  self.site = "http://0.0.0.0:3001"
+  self.site = "http://www2.westroadbike.it:3001/"
 
   %w(name id symbol capital_id abbreviation president population 
     density surface email website created_at updated_at).each do |meth|
