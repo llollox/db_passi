@@ -7,13 +7,46 @@ namespace :passes do
   include TaskUtilities
 
   task :geocode => :environment do
-    Pass.all.each do |pass|
+    Pass.all.each_with_index do |pass,index|
       if pass.latitude.nil? || pass.longitude.nil?
         pass.geocode
         pass.save
-        puts "\t " + pass.name + ": [" + pass.latitude.to_s + 
+        puts "[#{index}] " + pass.name + ": [" + pass.latitude.to_s + 
           ", " + pass.longitude.to_s + "]"
       end
+    end
+  end
+
+  task :remove_useless_items => :environment do
+    counter = 0
+    Pass.all.each_with_index do |pass,index|
+      if !pass.name.downcase.match(/^via|^bivio|^scollinamento/)
+        m = Municipality.search(pass.name)
+        if !m.blank?
+          puts "[#{index}] #{pass.name} -> MUNICIPALITY : #{m.first.name}"
+          pass.destroy
+        else
+          f = Fraction.search(pass.name)
+          if !f.blank?
+            puts "[#{index}] #{pass.name} -> FRACTION : #{f.first.name}" 
+            pass.destroy
+          else
+            puts "[#{index}] #{pass.name} -> NON TROVATO!"
+            counter = counter + 1
+          end
+        end
+      else
+        pass.destroy
+      end
+    end
+    puts "Unfounded: #{counter}"
+  end
+
+  task :set_name_encoded => :environment do
+    Pass.all.each_with_index do |pass, index|
+      pass.name_encoded = encode(pass.name)
+      pass.save
+      puts "[#{index}] " + pass.name
     end
   end
 

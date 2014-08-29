@@ -6,6 +6,7 @@ class CreatePasses < ActiveRecord::Migration
       t.integer :altitude
       t.float :latitude
       t.float :longitude
+      t.string :name_encoded
 
       t.timestamps
     end

@@ -1,9 +1,8 @@
-class DBComuniPicture < ActiveResource::Base
-
-  self.site = "http://www2.westroadbike.it:3001/"
-  self.element_name = "pictures"
-
-  %w(id photo photo_url picturable_id picturable_type).each do |meth|
+class DBComuni::DBComuniPicture < DBComuni
+	
+  %w(id photo_content_type photo_file_name 
+  		photo_file_size photo_updated_at photo_url 
+  		picturable_id picturable_type updated_at).each do |meth|
     define_method(meth) { 
       self.attributes[meth.to_sym]
     }

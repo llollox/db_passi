@@ -1,5 +1,6 @@
 class Pass < ActiveRecord::Base
-  attr_accessible :altitude, :latitude, :longitude, :name
+  include Searchable
+  attr_accessible :altitude, :latitude, :longitude, :name, :name_encoded
   has_many :localities, :dependent => :delete_all
 
   geocoded_by :address

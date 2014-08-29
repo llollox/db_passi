@@ -27,8 +27,9 @@ ActiveRecord::Schema.define(:version => 20140728203902) do
     t.integer  "altitude"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "name_encoded"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "user_sessions", :force => true do |t|
