@@ -10,5 +10,6 @@ class CreatePasses < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :passes, :name_encoded
   end
 end

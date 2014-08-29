@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20140728203902) do
     t.datetime "updated_at",   :null => false
   end
 
+  add_index "passes", ["name_encoded"], :name => "index_passes_on_name_encoded"
+
   create_table "user_sessions", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
