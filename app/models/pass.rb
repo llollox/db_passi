@@ -1,7 +1,6 @@
 class Pass < ActiveRecord::Base
   include Searchable
   attr_accessible :altitude, :latitude, :longitude, :name, :name_encoded
-  has_many :localities, :dependent => :delete_all
 
   geocoded_by :address
 	after_validation :geocode
@@ -15,4 +14,13 @@ class Pass < ActiveRecord::Base
 		end
 		return address + ", Italy"
 	end
+
+  def localities
+    result = []
+    Locality.where(:pass_id => self.id).each do |locality|
+      result = result << locality.localitiable
+    end
+    return result
+  end
+
 end

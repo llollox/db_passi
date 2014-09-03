@@ -1,37 +1,5 @@
-<%= form_for(@pass) do |f| %>
-  <% if @pass.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@pass.errors.count, "error") %> prohibited this pass from being saved:</h2>
-
-      <ul>
-      <% @pass.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :locality %><br />
-    <%= f.text_field :locality %>
-  </div>
-  <div class="field">
-    <%= f.label :altitude %><br />
-    <%= f.number_field :altitude %>
-  </div>
-  <div class="field">
-    <%= f.label :latitude %><br />
-    <%= f.text_field :latitude %>
-  </div>
-  <div class="field">
-    <%= f.label :longitude %><br />
-    <%= f.text_field :longitude %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= simple_form_for(@pass) do |f| %>
+  <% f.input :name, :label => "Name", :placeholder => "Name" %>
+  <% f.input :altitude, :label => "Altitude", :placeholder => "Altitude" %>
+  <%= f.submit %>
 <% end %>

@@ -104,12 +104,12 @@ module TaskUtilities
     object.symbol = picture
   end
 
-  def encode name
-    name = name.split("/").first if name.match(/\//)
-    name = name.split("\\").first if name.match(/\\/)
-    name = name.split(" - ").first if name.match(/ - /)
-    return name.gsub(/[^0-9A-Za-z]/, '').downcase
-  end
+  # def encode name
+  #   name = name.split("/").first if name.match(/\//)
+  #   name = name.split("\\").first if name.match(/\\/)
+  #   name = name.split(" - ").first if name.match(/ - /)
+  #   return name.gsub(/[^0-9A-Za-z]/, '').downcase
+  # end
 
   def findItemByName class_name, item_name
     items = []

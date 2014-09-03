@@ -11,15 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140728203902) do
+ActiveRecord::Schema.define(:version => 20140830131748) do
 
   create_table "localities", :force => true do |t|
     t.integer  "pass_id"
     t.integer  "municipality_id"
     t.integer  "fraction_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "localitiable_id"
+    t.string   "localitiable_type"
   end
+
+  add_index "localities", ["localitiable_id", "localitiable_type"], :name => "index_localities_on_localitiable_id_and_localitiable_type"
 
   create_table "passes", :force => true do |t|
     t.string   "name"

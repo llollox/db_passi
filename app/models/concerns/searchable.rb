@@ -50,7 +50,7 @@ def encode name
   name = name.split("/").first if name.match(/\//)
   name = name.split("\\").first if name.match(/\\/)
   name = name.split(" - ").first if name.match(/ - /)
-  name = name.gsub(/\s(e|del|dello|di|delle|dell|de|d|da|dal|della|dei|du|san)\s/, '')
+  name = name.gsub(/\s(e|del|dello|di|delle|dell|de|d|da|dal|della|dei|du|san|sant)\s/, '')
   name = name.gsub(/(d|dell|dall|sant)'\s*/,'')
   return name.gsub(/[^0-9A-Za-z]/, '')
 end
