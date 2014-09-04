@@ -16,7 +16,7 @@
 development_db_comuni:
   adapter: postgresql
   encoding: unicode
-  database: comuni_italiani_development
+  database: municipalities_development
   pool: 5
   username: postgres
   password: 
@@ -24,7 +24,7 @@ development_db_comuni:
 development:
   adapter: postgresql
   encoding: unicode
-  database: passi_italiani_development
+  database: passes_development
   pool: 5
   username: postgres
   password: 
