@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140830131748) do
+ActiveRecord::Schema.define(:version => 20140908122624) do
+
+  create_table "flickr_pictures", :force => true do |t|
+    t.string   "photo_url"
+    t.string   "title"
+    t.integer  "picturable_id"
+    t.string   "picturable_type"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "flickr_pictures", ["picturable_id", "picturable_type"], :name => "index_flickr_pictures_on_picturable_id_and_picturable_type"
 
   create_table "localities", :force => true do |t|
     t.integer  "pass_id"
